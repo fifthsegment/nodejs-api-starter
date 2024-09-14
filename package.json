@@ -1,0 +1,56 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^4.17.21",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "20.12.7",
+    "gts": "^5.3.1",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.5.4"
+  },
+  "imports": {
+    "#localapp-logger": "./bin/logger/index.js",
+    "#localapp-database": "./bin/database/index.js",
+    "#localapp-routes": "./bin/routes/index.js",
+    "#localapp-models": "./bin/models/models.js",
+    "#localapp-models/repository":"./bin/models/repository/repository.js",
+    "#localapp-core": "./bin/core/core.js",
+    "#localapp-utils":"./bin/utils/utils.js",
+    "#localapp/types":"./bin/types/types.js"
+  },
+  "scripts": {
+    "dev": "npx tsx watch src/index.ts",
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w",
+    "build": "npm run clean && npm run build-ts",
+    "serve": "node bin/index.js",
+    "lint": "gts lint",
+    "compile": "tsc",
+    "fix": "gts fix",
+    "watch": "npx concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run lint",
+    "watch-node": "nodemon -r dotenv/config bin/index.js",
+    "clean": "rimraf ./bin",
+    "start": "npm run build && npm run serve"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.26.1",
+    "axios": "^1.7.4",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "i": "^0.3.7",
+    "joi": "^17.13.3",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.6.1",
+    "morgan": "^1.10.0",
+    "npm": "^10.8.2",
+    "winston": "^3.14.2"
+  }
+}
